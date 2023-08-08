@@ -19,27 +19,35 @@ class BaseModel:
             id (str): The unique identifier of the object.
         """
         self.id = str(uuid4())
-        self.created_at = datetime.now().isoformat()
-        self.updated_at = datetime.now().isoformat()
-    
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+
     def __str__(self):
-        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
-    
+        """
+        string method that return descriptor of the object
+        Return:
+            object descriptor
+        """
+        return ("[{}] ({}) {}\
+".format(self.__class__.__name__, self.id, self.__dict__))
+
     def save(self):
-        self.updated_at = datetime.now().isoformat()
-    
-    def to_dict(self)
-    dictionary = {}
-    
+        """
+        save method that save time update and update
+        the updated_at instance attribute
+        """
+        self.updated_at = datetime.now()
 
-        
-
-
-
-soufiane = BaseModel()
-soufiane.name = "soufiane"
-soufiane.my_number = 93956
-print(soufiane)
-print(type(soufiane.id))
-print(soufiane.created_at)
-print(soufiane.updated_at)
+    def to_dict(self):
+        """
+        to_dict method that get an prepared dict
+        Return:
+            new dictionary
+        """
+        dictionary = {}
+        for key in self.__dict__:
+            dictionary[key] = self.__dict__[key]
+        dictionary["__class__"] = self.__class__.__name__
+        dictionary["created_at"] = self.created_at.isoformat()
+        dictionary["updated_at"] = self.updated_at.isoformat()
+        return dictionary
