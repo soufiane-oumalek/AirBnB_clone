@@ -182,7 +182,8 @@ class HBNBCommand(cmd.Cmd):
                 print(type(dictionary), dictionary)
                 string = className+" "+id
                 for attr in dictionary:
-                    self.do_update(string+" "+attr+" "+"\""+str(dictionary[attr])+"\"")
+                    self.do_update(string+" \
+"+attr+" "+"\""+str(dictionary[attr])+"\"")
             else:
                 string = className
                 for elm in args.split(", "):
