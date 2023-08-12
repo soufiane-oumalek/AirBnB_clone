@@ -28,18 +28,18 @@ class BaseModel:
         """
         if kwargs:
             for key in kwargs:
-                    if key == "__class__":
-                        pass
-                    elif key == "id":
-                        self.id = kwargs[key]
-                    elif key == "created_at":
-                        self.created_at = datetime.strptime(kwargs[key], "\
+                if key == "__class__":
+                    pass
+                elif key == "id":
+                    self.id = kwargs[key]
+                elif key == "created_at":
+                    self.created_at = datetime.strptime(kwargs[key], "\
 %Y-%m-%dT%H:%M:%S.%f")
-                    elif key == "updated_at":
-                        self.updated_at = datetime.strptime(kwargs[key], "\
+                elif key == "updated_at":
+                    self.updated_at = datetime.strptime(kwargs[key], "\
 %Y-%m-%dT%H:%M:%S.%f")
-                    else:
-                        setattr(self, key, kwargs[key])
+                else:
+                    setattr(self, key, kwargs[key])
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
