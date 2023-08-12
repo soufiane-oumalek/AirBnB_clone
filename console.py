@@ -10,6 +10,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 import shlex
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -120,6 +121,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, line):
         """C-d command to exit the program\n"""
+        print()
         return True
 
     def emptyline(self):
@@ -173,10 +175,19 @@ class HBNBCommand(cmd.Cmd):
         elif ".update(" in line and line.endswith(")"):
             className = line.split(".")[0]
             args = line.split("(")[1][:-1]
-            string = className
-            for elm in args.split(", "):
-                string += " "+elm
-            self.do_update(string)
+            if "{" in args and args.endswith("}"):
+                id = args.split(", ")[0]
+                str_dict = "{"+args.split("{")[1]
+                dictionary = dict(eval(str_dict))
+                print(type(dictionary), dictionary)
+                string = className+" "+id
+                for attr in dictionary:
+                    self.do_update(string+" "+attr+" "+"\""+str(dictionary[attr])+"\"")
+            else:
+                string = className
+                for elm in args.split(", "):
+                    string += " "+elm
+                self.do_update(string)
         else:
             print("*** Unknown syntax: "+line)
 
