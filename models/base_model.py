@@ -30,7 +30,7 @@ class BaseModel:
             for key in kwargs:
                 match key:
                     case "__class__":
-                        continue
+                        pass
                     case "id":
                         self.id = kwargs[key]
                     case "created_at":
@@ -45,7 +45,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-        models.storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """
