@@ -3,6 +3,7 @@
 file_storage that manages
 our storage
 """
+
 import json
 from models.base_model import BaseModel
 from models.user import User
@@ -15,9 +16,11 @@ from models.review import Review
 
 class FileStorage:
     """
-    define a class called
-    FileStorage that manage
-    objects storage
+    define a class
+    FileStorage that manage objects storage
+    attributes:
+        __file_path (str): file storage path
+        __objects (dict): dictionary of object created
     """
 
     __file_path = "file.json"
