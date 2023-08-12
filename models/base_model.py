@@ -32,8 +32,11 @@ class BaseModel:
                         pass
                     if key == "id":
                         self.id = kwargs[key]
-                    if key == "created_at" or key == "updated_at":
+                    if key == "created_at":
                         self.created_at = datetime.strptime(kwargs[key], "\
+%Y-%m-%dT%H:%M:%S.%f")
+                    if key == "updated_at":
+                        self.updated_at = datetime.strptime(kwargs[key], "\
 %Y-%m-%dT%H:%M:%S.%f")
                     else:
                         setattr(self, key, kwargs[key])
