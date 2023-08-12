@@ -91,16 +91,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """all command thar prints all objects representation"""
+        # TODO: all BaseModel dgf
         if arg == "":
             list_str = []
             for key in storage.all():
                 list_str.append(str(storage.all()[key]))
             print(list_str)
         else:
-            if arg in HBNBCommand.classes_list:
+            if arg.split()[0] in HBNBCommand.classes_list:
                 list_str = []
                 for key in storage.all():
-                    if arg in key:
+                    if arg.split()[0] in key:
                         list_str.append(str(storage.all()[key]))
                 print(list_str)
             else:
