@@ -2,7 +2,6 @@
 """
 base model of our airBnB
 """
-
 from datetime import datetime
 import models
 from uuid import uuid4
