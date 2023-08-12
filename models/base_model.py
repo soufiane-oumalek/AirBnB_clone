@@ -70,10 +70,15 @@ class BaseModel:
         Return:
             new dictionary
         """
-        dictionary = {}
-        for key in self.__dict__:
-            dictionary[key] = self.__dict__[key]
-        dictionary["__class__"] = self.__class__.__name__
-        dictionary["created_at"] = self.created_at.isoformat()
-        dictionary["updated_at"] = self.updated_at.isoformat()
-        return dictionary
+        # dictionary = {}
+        # for key in self.__dict__:
+        #     dictionary[key] = self.__dict__[key]
+        # dictionary["__class__"] = self.__class__.__name__
+        # dictionary["created_at"] = self.created_at.isoformat()
+        # dictionary["updated_at"] = self.updated_at.isoformat()
+        # return dictionary
+        new_dict = self.__dict__.copy()
+        new_dict["__class__"] = self.__class__.__name__
+        new_dict["created_at"] = self.created_at.isoformat()
+        new_dict["updated_at"] = self.updated_at.isoformat()
+        return new_dict
