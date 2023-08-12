@@ -14,16 +14,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """
-        Initializes the `BaseModel` object.
-
-        Args:
-            *args: Additional positional arguments (if any).
-            **kwargs: Additional keyword arguments (if any).
-
-        Attributes:
-            id (str): The unique identifier of the object.
-            created_at (datetime): time when has been created
-            updated_at (datetime): time when has been updated
+        Initializes the BaseModel object.
         """
         if kwargs:
             for key in kwargs:
@@ -47,28 +38,17 @@ class BaseModel:
         models.storage.new(self)
 
     def __str__(self):
-        """
-        string method that return descriptor of the object
-        Return:
-            object descriptor
-        """
+        """string method that return descriptor of the object"""
         return ("[{}] ({}) {}\
 ".format(self.__class__.__name__, self.id, self.__dict__))
 
     def save(self):
-        """
-        save method that save time update and update
-        the updated_at instance attribute
-        """
+        """save method that save time update and update"""
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """
-        to_dict method that get an prepared dict
-        Return:
-            new dictionary
-        """
+        """to_dict method that get an prepared dict"""
         dictionary = {}
         for key in self.__dict__:
             dictionary[key] = self.__dict__[key]
