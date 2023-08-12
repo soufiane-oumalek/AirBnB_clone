@@ -26,26 +26,26 @@ class BaseModel:
             created_at (datetime): time when has been created
             updated_at (datetime): time when has been updated
         """
-        if kwargs:
-            for key in kwargs:
-                match key:
-                    case "__class__":
-                        pass
-                    case "id":
-                        setattr(self, key, str(kwargs[key]))
-                    case "created_at":
-                        setattr(self, key, datetime.strptime(kwargs[key], "\
-%Y-%m-%dT%H:%M:%S.%f"))
-                    case "updated_at":
-                        setattr(self, key, datetime.strptime(kwargs[key], "\
-%Y-%m-%dT%H:%M:%S.%f"))
-                    case _:
-                        setattr(self, key, kwargs[key])
-        else:
-            self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-            models.storage.new(self)
+#         if kwargs:
+#             for key in kwargs:
+#                 match key:
+#                     case "__class__":
+#                         pass
+#                     case "id":
+#                         self.id = kwargs[key]
+#                     case "created_at":
+#                         self.created_at = datetime.strptime(kwargs[key], "\
+# %Y-%m-%dT%H:%M:%S.%f")
+#                     case "updated_at":
+#                         self.updated_at = datetime.strptime(kwargs[key], "\
+# %Y-%m-%dT%H:%M:%S.%f")
+#                     case _:
+#                         setattr(self, key, kwargs[key])
+#         else:
+        self.id = str(uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        # models.storage.new(self)
 
     def __str__(self):
         """
@@ -62,7 +62,7 @@ class BaseModel:
         the updated_at instance attribute
         """
         self.updated_at = datetime.now()
-        models.storage.save()
+        # models.storage.save()
 
     def to_dict(self):
         """
