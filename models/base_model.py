@@ -30,7 +30,7 @@ class BaseModel:
             for key in kwargs:
                 match key:
                     case "__class__":
-                        pass
+                        continue
                     case "id":
                         self.id = kwargs[key]
                     case "created_at":
