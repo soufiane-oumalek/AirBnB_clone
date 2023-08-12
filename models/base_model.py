@@ -2,6 +2,7 @@
 """
 base model of our airBnB
 """
+
 from datetime import datetime
 import models
 from uuid import uuid4
@@ -53,7 +54,7 @@ class BaseModel:
             object descriptor
         """
         return ("[{}] ({}) {}\
-".format(type(self).__name__, self.id, self.__dict__))
+".format(self.__class__.__name__, self.id, self.__dict__))
 
     def save(self):
         """
