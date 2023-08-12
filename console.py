@@ -92,6 +92,40 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
+    def do_update(self, arg):
+        """update command that update an object"""
+        if self.check_id(arg):
+            if self.check_attr(arg):
+                args_list = shlex.split(arg)
+                obj = storage.all()[f"{args_list[0]}.{args_list[1]}"]
+                if hasattr(obj, args_list[2]):
+                    # TODO: handle casting error by using try except
+                    value = type(getattr(obj, args_list[2]))(args_list[3])
+                    setattr(obj, args_list[2], value)
+                else:
+                    value = args_list[3]
+                    try:
+                        if '.' in value:
+                            value = float(value)
+                        else:
+                            value = int(value)
+                    except ValueError:
+                        value = args_list[3]
+                    setattr(obj, args_list[2], value)
+                obj.save()
+
+    def do_quit(self, line):
+        """Quit command to exit the program\n"""
+        return True
+
+    def do_EOF(self, line):
+        """C-d command to exit the program\n"""
+        return True
+
+    def emptyline(self):
+        """an empty line handling"""
+        pass
+
     def default(self, line):
         """
         default commands
@@ -145,39 +179,6 @@ class HBNBCommand(cmd.Cmd):
             self.do_update(string)
         else:
             print("*** Unknown syntax: "+line)
-
-    def do_update(self, arg):
-        """update command that update an object"""
-        if self.check_id(arg):
-            if self.check_attr(arg):
-                args_list = shlex.split(arg)
-                obj = storage.all()[f"{args_list[0]}.{args_list[1]}"]
-                if hasattr(obj, args_list[2]):
-                    value = type(getattr(obj, args_list[2]))(args_list[3])
-                    setattr(obj, args_list[2], value)
-                else:
-                    value = args_list[3]
-                    try:
-                        if '.' in value:
-                            value = float(value)
-                        else:
-                            value = int(value)
-                    except ValueError:
-                        value = args_list[3]
-                    setattr(obj, args_list[2], value)
-                obj.save()
-
-    def do_quit(self, line):
-        """Quit command to exit the program\n"""
-        return True
-
-    def do_EOF(self, line):
-        """C-d command to exit the program\n"""
-        return True
-
-    def emptyline(self):
-        """an empty line handling"""
-        pass
 
 
 if __name__ == '__main__':
