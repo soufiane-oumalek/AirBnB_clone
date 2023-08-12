@@ -53,7 +53,7 @@ class BaseModel:
             object descriptor
         """
         return ("[{}] ({}) {}\
-".format(self.__class__.__name__, self.id, self.__dict__))
+".format(type(self).__name__, self.id, self.__dict__))
 
     def save(self):
         """
@@ -70,12 +70,9 @@ class BaseModel:
             new dictionary
         """
         dictionary = {}
-        dictionary["__class__"] = self.__class__.__name__
         for key in self.__dict__:
-            if key != "created_at" and key != "updated_at":
-                dictionary[key] = self.__dict__[key]
-            else:
-                dictionary[key] = self.__dict__[key].isoformat()
-        # dictionary["created_at"] = self.created_at.isoformat()
-        # dictionary["updated_at"] = self.updated_at.isoformat()
+            dictionary[key] = self.__dict__[key]
+        dictionary["__class__"] = self.__class__.__name__
+        dictionary["created_at"] = self.created_at.isoformat()
+        dictionary["updated_at"] = self.updated_at.isoformat()
         return dictionary
