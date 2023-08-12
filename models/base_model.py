@@ -30,12 +30,12 @@ class BaseModel:
             for key in kwargs:
                     if key == "__class__":
                         pass
-                    if key == "id":
+                    elif key == "id":
                         self.id = kwargs[key]
-                    if key == "created_at":
+                    elif key == "created_at":
                         self.created_at = datetime.strptime(kwargs[key], "\
 %Y-%m-%dT%H:%M:%S.%f")
-                    if key == "updated_at":
+                    elif key == "updated_at":
                         self.updated_at = datetime.strptime(kwargs[key], "\
 %Y-%m-%dT%H:%M:%S.%f")
                     else:
