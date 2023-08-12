@@ -33,13 +33,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """create command to creates a new instance\n"""
-        className = arg.split()[0]
-        if className == "":
+        className = arg.split()
+        if len(className) == 0:
             print("** class name missing **")
-        elif className not in HBNBCommand.classes_list:
+        elif className[0] not in HBNBCommand.classes_list:
             print("** class doesn't exist **")
         else:
-            new_obj = eval(className)()
+            new_obj = eval(className[0])()
             storage.save()
             print(new_obj.id)
 
