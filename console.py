@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+Module of AIRBNB console
+"""
+
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -10,10 +14,19 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 import shlex
+import sys
 import json
 
 
 class HBNBCommand(cmd.Cmd):
+    """
+    define HBNBCommand class
+
+    Classe Attributes:
+        prompt (str): The prompt.
+        classes_list (list): A list of all used class names.
+    """
+
     prompt = "(hbnb) "
     classes_list = ["BaseModel", "User", "State", "City\
 ", "Amenity", "Place", "Review"]
@@ -121,7 +134,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, line):
         """C-d command to exit the program\n"""
-        print()
         return True
 
     def emptyline(self):
