@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" unit test for bases """
+"""
+basemodel unittest
+"""
 import json
 import unittest
 from models.base_model import BaseModel
@@ -13,7 +15,9 @@ sys.stdout = captured_output
 
 
 class BaseModelTestCase(unittest.TestCase):
-    """ class for base test """
+    """
+    Base Test class
+    """
     pass
 
 

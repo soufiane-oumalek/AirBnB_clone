@@ -114,8 +114,11 @@ class HBNBCommand(cmd.Cmd):
                 obj = storage.all()[f"{args_list[0]}.{args_list[1]}"]
                 if hasattr(obj, args_list[2]):
                     # TODO: handle casting error by using try except
-                    value = type(getattr(obj, args_list[2]))(args_list[3])
-                    setattr(obj, args_list[2], value)
+                    try:
+                        value = type(getattr(obj, args_list[2]))(args_list[3])
+                        setattr(obj, args_list[2], value)
+                    except ValueError:
+                        pass
                 else:
                     value = args_list[3]
                     try:
@@ -191,7 +194,6 @@ class HBNBCommand(cmd.Cmd):
                 id = args.split(", ")[0]
                 str_dict = "{"+args.split("{")[1]
                 dictionary = dict(eval(str_dict))
-                print(type(dictionary), dictionary)
                 string = className+" "+id
                 for attr in dictionary:
                     self.do_update(string+" \
