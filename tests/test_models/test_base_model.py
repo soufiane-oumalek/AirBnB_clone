@@ -44,6 +44,19 @@ class BaseModelTest(unittest.TestCase):
             self.assertTrue(eval(key.split(".\
 ")[0]) == storage.all()[key].__class__)
 
+    def test_instance(self):
+        """Testing a new created instance"""
+        obj = BaseModel()
+        self.assertEqual(BaseModel, type(obj))
+
+    def test_instance_id(self):
+        obj = BaseModel()
+        self.assertEqual(str, type(obj.id))
+
+    def test_obj_id(self):
+        obj = BaseModel()
+        self.assertEqual(datetime, type(obj.created_at))
+
     def test_unique_id(self):
         """
         test if two obj has two different ids
@@ -51,6 +64,15 @@ class BaseModelTest(unittest.TestCase):
         bm1 = BaseModel()
         bm2 = BaseModel()
         self.assertNotEqual(bm1.id, bm2.id)
+
+    def test_obj_str(self):
+        obj = BaseModel()
+        expected_str = "[BaseModel] ({}) {}".format(obj.id, obj.__dict__)
+        self.assertEqual(expected_str, obj.__str__())
+
+    def test_obj_created_at(self):
+        obj = BaseModel()
+        self.assertEqual(datetime, type(obj.created_at))
 
 
 if __name__ == '__main__':
