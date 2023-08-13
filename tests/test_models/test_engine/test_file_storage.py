@@ -12,6 +12,7 @@ from models.place import Place
 from models.state import State
 from models.review import Review
 from models.user import User
+from models.engine.file_storage import FileStorage
 from io import StringIO
 import sys
 from unittest.mock import patch
@@ -30,6 +31,20 @@ class FileStorageTest(unittest.TestCase):
         result = pycodestyle.check_files(["models/engine/file_storage.py"])
         errorMessage = "Found code style errors (and warnings)."
         self.assertEqual(result.total_errors, 0, errorMessage)
+
+    def testCreatInstanceNoKwarg(self):
+        self.assertEqual(type(FileStorage()), FileStorage)
+
+    def testCreatInstanceKwarg(self):
+        with self.assertRaises(TypeError):
+            FileStorage(None)
+
+    def testStorage(self):
+        self.assertEqual(type(storage), FileStorage)
+
+    def testIsPrivate(self):
+        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
+        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
     def test_all(self):
         """
@@ -133,10 +148,6 @@ class FileStorageTest(unittest.TestCase):
         self.assertIn("City." + c.id, objs)
         self.assertIn("Amenity." + a.id, objs)
         self.assertIn("Review." + r.id, objs)
-
-    def test_reload_with_arg(self):
-        with self.assertRaises(TypeError):
-            storage.reload(None)
 
 
 if __name__ == '__main__':
