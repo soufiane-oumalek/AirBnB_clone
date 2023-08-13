@@ -19,12 +19,12 @@ __How to use it__
 - **C-d**: Swiftly bid farewell.
 
 __Example__
-- **create**: *create BaseModel*
-- **destroy**: *destroy BaseModel 1234-1234-1234*
-- **show**: *show BaseModel 1234-1234-1234*
-- **all**: *all BaseModel or all*
-- **update**: *<class name> <id> <attribute name> "<attribute value>"*
-- **Quit**: *quit*
-- **C-d**: *Ctrl D*
-
+- *the prompt :* `(hbnb) `
+- **create**: `create BaseModel`
+- **destroy**: `destroy BaseModel 1234-1234-1234`
+- **show**: `show BaseModel 1234-1234-1234`
+- **all**: `all BaseModel or all`
+- **update**: `<class name> <id> <attribute name> "<attribute value>"`
+- **Quit**: `quit`
+- **C-d**: `Ctrl D`
  
