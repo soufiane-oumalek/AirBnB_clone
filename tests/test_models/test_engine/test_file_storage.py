@@ -38,6 +38,9 @@ class FileStorageTest(unittest.TestCase):
         for key in storage.all():
             self.assertTrue(eval(key.split(".\
 ")[0]) == storage.all()[key].__class__)
+        self.assertEqual(dict, type(storage.all()))
+        with self.assertRaises(TypeError):
+            storage.all(None)
 
     def test_id(self):
         """
@@ -46,6 +49,37 @@ class FileStorageTest(unittest.TestCase):
         for key in storage.all():
             self.assertTrue(key.split(".\
 ")[1] == storage.all()[key].to_dict()["id"])
+
+    def test_new(self):
+        b = BaseModel()
+        storage.new(b)
+        u = User()
+        storage.new(u)
+        s = State()
+        storage.new(s)
+        p = Place()
+        storage.new(p)
+        c = City()
+        storage.new(c)
+        a = Amenity()
+        storage.new(a)
+        r = Review()
+        storage.new(r)
+        objs = storage.all()
+        self.assertIn("BaseModel." + b.id, objs)
+        self.assertIn("User." + u.id, objs)
+        self.assertIn("State." + s.id, objs)
+        self.assertIn("Place." + p.id, objs)
+        self.assertIn("City." + c.id, objs)
+        self.assertIn("Amenity." + a.id, objs)
+        self.assertIn("Review." + r.id, objs)
+        self.assertIn(b, objs.values())
+        self.assertIn(u, objs.values())
+        self.assertIn(s, objs.values())
+        self.assertIn(p, objs.values())
+        self.assertIn(c, objs.values())
+        self.assertIn(a, objs.values())
+        self.assertIn(r, objs.values())
 
     def test_save(self):
         b = BaseModel()
