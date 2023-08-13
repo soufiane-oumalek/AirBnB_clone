@@ -31,13 +31,21 @@ class FileStorageTest(unittest.TestCase):
         errorMessage = "Found code style errors (and warnings)."
         self.assertEqual(result.total_errors, 0, errorMessage)
 
-    def test_storage(self):
+    def test_all(self):
         """
-        storage test
+        all method testing
         """
         for key in storage.all():
             self.assertTrue(eval(key.split(".\
 ")[0]) == storage.all()[key].__class__)
+
+    def test_id(self):
+        """
+        id testing
+        """
+        for key in storage.all():
+            self.assertTrue(key.split(".\
+")[1] == storage.all()[key].to_dict()["id"])
 
 
 if __name__ == '__main__':
