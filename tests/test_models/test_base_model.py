@@ -37,11 +37,20 @@ class BaseModelTest(unittest.TestCase):
 
     def test_all(self):
         """
-        storage test
+        test all even if there is no
+        point of testing it
         """
         for key in storage.all():
             self.assertTrue(eval(key.split(".\
 ")[0]) == storage.all()[key].__class__)
+
+    def test_unique_id(self):
+        """
+        test if two obj has two different ids
+        """
+        bm1 = BaseModel()
+        bm2 = BaseModel()
+        self.assertNotEqual(bm1.id, bm2.id)
 
 
 if __name__ == '__main__':

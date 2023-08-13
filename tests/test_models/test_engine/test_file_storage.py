@@ -33,6 +33,7 @@ class FileStorageTest(unittest.TestCase):
         errorMessage = "Found code style errors (and warnings)."
         self.assertEqual(result.total_errors, 0, errorMessage)
 
+    @classmethod
     def NoOldJson(self):
         """removing the old JSON file"""
         try:
@@ -75,6 +76,9 @@ class FileStorageTest(unittest.TestCase):
 ")[1] == storage.all()[key].to_dict()["id"])
 
     def test_new(self):
+        """
+        new method testing
+        """
         b = BaseModel()
         storage.new(b)
         u = User()
@@ -106,6 +110,9 @@ class FileStorageTest(unittest.TestCase):
         self.assertIn(r, objs.values())
 
     def test_save(self):
+        """
+        save method testing
+        """
         b = BaseModel()
         storage.new(b)
         u = User()
@@ -132,7 +139,10 @@ class FileStorageTest(unittest.TestCase):
             self.assertIn("Amenity." + a.id, text)
             self.assertIn("Review." + r.id, text)
 
-    def test_relaod(self):
+    def test_reload(self):
+        """
+        load method testing
+        """
         b = BaseModel()
         storage.new(b)
         u = User()
