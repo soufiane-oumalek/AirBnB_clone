@@ -171,6 +171,61 @@ class FileStorageTest(unittest.TestCase):
         self.assertIn("City." + c.id, objs)
         self.assertIn("Amenity." + a.id, objs)
         self.assertIn("Review." + r.id, objs)
+# ...................................
+
+    def test_FileStorage_init(self):
+        """ DOC DOC DOC """
+        filepath = storage._FileStorage__file_path
+        _objs = storage._FileStorage__objects
+        """check class attr"""
+        self.assertEqual(filepath, "file.json")
+        self.assertIsInstance(filepath, str)
+        self.assertIsInstance(_objs, dict)
+        new = BaseModel()
+        """ check if it have methods """
+        self.assertTrue(hasattr(new, "__init__"))
+        self.assertTrue(hasattr(new, "__str__"))
+        self.assertTrue(hasattr(new, "save"))
+        self.assertTrue(hasattr(new, "to_dict"))
+
+        """test all"""
+        self.assertIsInstance(storage.all(), dict)
+        self.assertNotEqual(storage.all(), {})
+        """existence id"""
+        self.assertTrue(hasattr(new, "id"))
+        self.assertIsInstance(new.id, str)
+
+        """new"""
+        keyname = "BaseModel."+new.id
+        self.assertIsInstance(storage.all()[keyname], BaseModel)
+        self.assertEqual(storage.all()[keyname], new)
+        """ check if object exist by keyname """
+        self.assertIn(keyname, storage.all())
+        """ check if the object found in storage with corrrect id"""
+        self.assertTrue(storage.all()[keyname] is new)
+
+        """save"""
+        storage.save()
+        with open(filepath, 'r') as file:
+            saved_data = json.load(file)
+        """ check if object exist by keyname """
+        self.assertIn(keyname, saved_data)
+        """ check if the value found in json is correct"""
+        self.assertEqual(saved_data[keyname], new.to_dict())
+
+        """reload"""
+        storage.all().clear()
+        storage.reload()
+        with open(filepath, 'r') as file:
+            saved_data = json.load(file)
+        self.assertEqual(saved_data[keyname],
+                        storage.all()[keyname].to_dict())
+
+        """file"""
+        if path.exists(filepath):
+            remove(filepath)
+        self.assertFalse(path.exists(filepath))
+        storage.reload()
 
 
 if __name__ == '__main__':
