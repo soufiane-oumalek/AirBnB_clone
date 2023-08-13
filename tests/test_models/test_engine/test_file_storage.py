@@ -14,7 +14,7 @@ from models.review import Review
 from models.user import User
 from models.engine.file_storage import FileStorage
 from io import StringIO
-from os import remove
+import os
 import sys
 from unittest.mock import patch
 captured_output = StringIO()
@@ -33,11 +33,30 @@ class FileStorageTest(unittest.TestCase):
         errorMessage = "Found code style errors (and warnings)."
         self.assertEqual(result.total_errors, 0, errorMessage)
 
+    # @classmethod
+    # def NoOldJson(self):
+    #     """removing the old JSON file"""
+    #     try:
+    #         remove(self.storage._FileStorage__file_path)
+    #     except IOError:
+    #         pass
+    #     FileStorage._FileStorage__objects = {}
+
     @classmethod
-    def NoOldJson(self):
-        """removing the old JSON file"""
+    def setUp(self):
         try:
-            remove(self.storage._FileStorage__file_path)
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+
+    @classmethod
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
         except IOError:
             pass
         FileStorage._FileStorage__objects = {}
