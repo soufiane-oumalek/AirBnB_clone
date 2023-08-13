@@ -5,8 +5,15 @@ basemodel unittest
 import unittest
 import subprocess
 import pep8
+from models import storage
 from models.base_model import BaseModel
 from datetime import datetime
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.state import State
+from models.review import Review
+from models.user import User
 from io import StringIO
 import sys
 from unittest.mock import patch
@@ -27,6 +34,14 @@ class BaseModelTest(unittest.TestCase):
                                           "models/__init__.py"])
         errorMessage = "Found code style errors (and warnings)."
         self.assertEqual(result.total_errors, 0, errorMessage)
+
+    def test_all(self):
+        """
+        storage test
+        """
+        for key in storage.all():
+            self.assertTrue(eval(key.split(".\
+")[0]) == storage.all()[key].__class__)
 
 
 if __name__ == '__main__':
