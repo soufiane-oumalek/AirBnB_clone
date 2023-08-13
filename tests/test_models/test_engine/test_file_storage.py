@@ -134,6 +134,10 @@ class FileStorageTest(unittest.TestCase):
         self.assertIn("Amenity." + a.id, objs)
         self.assertIn("Review." + r.id, objs)
 
+    def test_reload_with_arg(self):
+        with self.assertRaises(TypeError):
+            storage.reload(None)
+
 
 if __name__ == '__main__':
     unittest.main()
