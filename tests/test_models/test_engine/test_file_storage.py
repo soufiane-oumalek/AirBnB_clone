@@ -15,6 +15,7 @@ from models.user import User
 from models.engine.file_storage import FileStorage
 from io import StringIO
 from os import remove
+from os import path
 import sys
 from unittest.mock import patch
 captured_output = StringIO()
@@ -33,6 +34,13 @@ class FileStorageTest(unittest.TestCase):
         errorMessage = "Found code style errors (and warnings)."
         self.assertEqual(result.total_errors, 0, errorMessage)
 
+    def testJSON(self):
+        file = storage._FileStorage__file_path
+        if path.exists(file):
+            remove(file)
+        self.assertFalse(path.exists(file))
+        storage.reload()
+
     @classmethod
     def NoOldJson(self):
         """removing the old JSON file"""
@@ -49,12 +57,15 @@ class FileStorageTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             FileStorage(None)
 
-    def testStorage(self):
-        self.assertEqual(type(storage), FileStorage)
-
     def testIsPrivate(self):
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
+    
+    def testAttExist(self):
+        self.assertTrue(hasattr(storage, "all"))
+        self.assertTrue(hasattr(storage, "new"))
+        self.assertTrue(hasattr(storage, "save"))
+        self.assertTrue(hasattr(storage, "reload"))
 
     def test_all(self):
         """
