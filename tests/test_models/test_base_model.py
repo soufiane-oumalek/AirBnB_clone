@@ -90,6 +90,14 @@ class BaseModelTest(unittest.TestCase):
         }
         self.assertEqual(dictionary_cmp, dictionary)
 
+    def test_instance_init_kwargs(self):
+        """Testing kwargs"""
+        instance = BaseModel()
+        instance.name = "My First Model"
+        instance.my_number = 89
+        self.assertEqual(instance.name, "My First Model")
+        self.assertEqual(instance.my_number, 89)
+
 
 if __name__ == '__main__':
     unittest.main()
