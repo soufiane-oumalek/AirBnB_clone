@@ -7,18 +7,24 @@ As of now, the project primarily focuses on the development of the back-end cons
 </p>
 
 <h3 align="left">To start the console :</h3>
-    - run `./console`:
-        * use does command to manage your package
-            . create command to creates a new instance
-            . destroy command that destroy object"""
-            . all command thar prints all objects representation
-            . update command that update an object
-            . Quit command to exit the program
-            . C-d command to exit the program
-    - example:
-        * run `./console`
-        -> `(hbnb) `
-        * `(hbnb) create User`
-        -> `(hbnb) 4a5942ad-ae60-4ce4-a936-58d15e1713a1`
-    - how to use it:
-        *
+
+__Run__: *./console.py*
+
+__How to use it__
+- **create**: Craft new instances of specified classes.
+- **destroy**: Obliterate objects based on class name and ID.
+- **all**: Visualize representations of all objects or specific classes.
+- **update**: Elevate object attributes to new heights.
+- **Quit**: Gracefully exit the program.
+- **C-d**: Swiftly bid farewell.
+
+__Example__
+- **create**: *create BaseModel*
+- **destroy**: *destroy BaseModel 1234-1234-1234*
+- **show**: *show BaseModel 1234-1234-1234*
+- **all**: *all BaseModel or all*
+- **update**: *<class name> <id> <attribute name> "<attribute value>"*
+- **Quit**: *quit*
+- **C-d**: *Ctrl D*
+
+ 
