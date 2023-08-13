@@ -2,7 +2,7 @@
 """ unit test for bases """
 import json
 import unittest
-from models.base_model import BaseModel
+import pep8
 from datetime import datetime
 import models
 from io import StringIO
@@ -12,9 +12,17 @@ captured_output = StringIO()
 sys.stdout = captured_output
 
 
-class BaseModelTestCase(unittest.TestCase):
+class FileStorageTest(unittest.TestCase):
     """ class for base test """
-    pass
+
+    def test_pep8_compliance(self):
+        """
+        pycodestyle testing
+        """
+        pycodestyle = pep8.StyleGuide(quiet=True)
+        result = pycodestyle.check_files(["models/engine/file_storage.py"])
+        errorMessage = "Found code style errors (and warnings)."
+        self.assertEqual(result.total_errors, 0, errorMessage)
 
 
 if __name__ == '__main__':
