@@ -66,13 +66,31 @@ class BaseModelTest(unittest.TestCase):
         self.assertNotEqual(bm1.id, bm2.id)
 
     def test_obj_str(self):
+        """
+        test obj sring reprisotation
+        """
         obj = BaseModel()
         expected_str = "[BaseModel] ({}) {}".format(obj.id, obj.__dict__)
         self.assertEqual(expected_str, obj.__str__())
 
     def test_obj_created_at(self):
+        """
+        test obj sring reprisotation
+        """
         obj = BaseModel()
         self.assertEqual(datetime, type(obj.created_at))
+
+    def test_time(self):
+        """
+        test obj time update
+        """
+        obj = BaseModel()
+
+        self.assertEqual(str(obj),  f"[BaseModel] ({obj.id}) {obj.__dict__}")
+        old_time = obj.updated_at
+        obj.save()
+        new_time = obj.updated_at
+        self.assertLess(old_time, new_time)
 
 
 if __name__ == '__main__':
