@@ -14,6 +14,7 @@ from models.review import Review
 from models.user import User
 from models.engine.file_storage import FileStorage
 from io import StringIO
+from os import remove
 import sys
 from unittest.mock import patch
 captured_output = StringIO()
@@ -31,6 +32,13 @@ class FileStorageTest(unittest.TestCase):
         result = pycodestyle.check_files(["models/engine/file_storage.py"])
         errorMessage = "Found code style errors (and warnings)."
         self.assertEqual(result.total_errors, 0, errorMessage)
+
+    def NoOldJson(self):
+        """removing the old JSON file"""
+        try:
+            remove(self.storage._FileStorage__file_path)
+        except FileNotFoundError:
+            pass
 
     def testCreatInstanceNoKwarg(self):
         self.assertEqual(type(FileStorage()), FileStorage)
