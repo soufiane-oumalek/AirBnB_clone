@@ -52,7 +52,7 @@ class FileStorageTest(unittest.TestCase):
     def testIsPrivate(self):
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
-    
+
     def testAttExist(self):
         self.assertTrue(hasattr(storage, "all"))
         self.assertTrue(hasattr(storage, "new"))
@@ -219,7 +219,7 @@ class FileStorageTest(unittest.TestCase):
         with open(filepath, 'r') as file:
             saved_data = json.load(file)
         self.assertEqual(saved_data[keyname],
-                        storage.all()[keyname].to_dict())
+                         storage.all()[keyname].to_dict())
 
         """file"""
         if path.exists(filepath):
