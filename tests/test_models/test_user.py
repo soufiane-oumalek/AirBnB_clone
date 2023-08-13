@@ -4,6 +4,7 @@ import json
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
+import pep8
 import models
 from io import StringIO
 import sys
@@ -12,9 +13,17 @@ captured_output = StringIO()
 sys.stdout = captured_output
 
 
-class BaseModelTestCase(unittest.TestCase):
+class UserTest(unittest.TestCase):
     """ class for base test """
-    pass
+
+    def test_pep8_compliance(self):
+        """
+        pycodestyle testing
+        """
+        pycodestyle = pep8.StyleGuide(quiet=True)
+        result = pycodestyle.check_files(["models/user.py"])
+        errorMessage = "Found code style errors (and warnings)."
+        self.assertEqual(result.total_errors, 0, errorMessage)
 
 
 if __name__ == '__main__':
