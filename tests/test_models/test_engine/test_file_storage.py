@@ -41,15 +41,6 @@ class FileStorageTest(unittest.TestCase):
         self.assertFalse(path.exists(file))
         storage.reload()
 
-    @classmethod
-    def NoOldJson(self):
-        """removing the old JSON file"""
-        try:
-            remove(self.storage._FileStorage__file_path)
-        except IOError:
-            pass
-        FileStorage._FileStorage__objects = {}
-
     def testCreatInstanceNoKwarg(self):
         self.assertEqual(type(FileStorage()), FileStorage)
 
@@ -77,6 +68,7 @@ class FileStorageTest(unittest.TestCase):
         self.assertEqual(dict, type(storage.all()))
         with self.assertRaises(TypeError):
             storage.all(None)
+        self.assertNotEqual(storage.all(), {})
 
     def test_id(self):
         """
