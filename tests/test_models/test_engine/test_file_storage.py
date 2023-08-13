@@ -37,8 +37,9 @@ class FileStorageTest(unittest.TestCase):
         """removing the old JSON file"""
         try:
             remove(self.storage._FileStorage__file_path)
-        except FileNotFoundError:
+        except IOError:
             pass
+        FileStorage._FileStorage__objects = {}
 
     def testCreatInstanceNoKwarg(self):
         self.assertEqual(type(FileStorage()), FileStorage)
