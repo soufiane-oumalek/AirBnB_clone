@@ -36,6 +36,7 @@ class FileStorageTest(unittest.TestCase):
 
     def testJSON(self):
         file = storage._FileStorage__file_path
+        self.assertEqual(file, "file.json")
         if path.exists(file):
             remove(file)
         self.assertFalse(path.exists(file))
