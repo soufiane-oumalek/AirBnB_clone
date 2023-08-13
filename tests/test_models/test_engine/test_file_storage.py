@@ -36,7 +36,8 @@ class FileStorageTest(unittest.TestCase):
         storage test
         """
         for key in storage.all():
-            self.assertTrue(eval(key.split(".")[0]) == storage.all()[key].__class__)
+            self.assertTrue(eval(key.split(".\
+")[0]) == storage.all()[key].__class__)
 
 
 if __name__ == '__main__':
