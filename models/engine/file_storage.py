@@ -60,5 +60,5 @@ class FileStorage:
                 dictionary = json.loads(file.read())
             for key in dictionary:
                 self.new(eval(dictionary[key]["__class__"])(**dictionary[key]))
-        except IOError:
+        except Exception:
             pass
