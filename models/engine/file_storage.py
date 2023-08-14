@@ -27,39 +27,27 @@ class FileStorage:
     __objects = {}
 
     def all(self):
-        """
-        get objects of the class
-        """
+        """ get objects of the class """
         return FileStorage.__objects
 
     def new(self, obj):
-        """
-        Add new object to objects dictionary
-        """
+        """ Add new object to objects dictionary """
         FileStorage.__objects["{}.{}\
 ".format(obj.to_dict()['__class__'], obj.id)] = obj
 
     def save(self):
-        """
-        Save objects to
-        json file
-        """
+        """ Save objects to json file """
         dictionary = {}
         for key in FileStorage.__objects:
             dictionary[key] = FileStorage.__objects[key].to_dict()
         with open(FileStorage.__file_path, "w") as file:
-            # file.write(json.dumps(dictionary))
-            json.dump(dictionary, file)
+            file.write(json.dumps(dictionary))
 
     def reload(self):
-        """
-        load objects from
-        json file
-        """
+        """ load objects from json file """
         try:
             with open(FileStorage.__file_path, "r") as file:
-                # dictionary = json.loads(file.read())
-                dictionary = json.load(file)
+                dictionary = json.loads(file.read())
             for key in dictionary:
                 self.new(eval(dictionary[key]["__class__"])(**dictionary[key]))
         except IOError:
