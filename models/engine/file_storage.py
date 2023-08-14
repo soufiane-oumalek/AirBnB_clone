@@ -48,7 +48,8 @@ class FileStorage:
         for key in FileStorage.__objects:
             dictionary[key] = FileStorage.__objects[key].to_dict()
         with open(FileStorage.__file_path, "w") as file:
-            file.write(json.dumps(dictionary))
+            # file.write(json.dumps(dictionary))
+            json.dump(dictionary, file)
 
     def reload(self):
         """
@@ -57,8 +58,9 @@ class FileStorage:
         """
         try:
             with open(FileStorage.__file_path, "r") as file:
-                dictionary = json.loads(file.read())
+                # dictionary = json.loads(file.read())
+                dictionary = json.load(file)
             for key in dictionary:
                 self.new(eval(dictionary[key]["__class__"])(**dictionary[key]))
-        except Exception:
+        except IOError:
             pass
