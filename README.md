@@ -1,5 +1,7 @@
+<h1 align="center">HBNB CLONE PROJECT</h1>
+
 ![MasterHead](https://cloudfront-eu-central-1.images.arcpublishing.com/le360/CCUVXYGTZBGBJDYZ47UIENUC54.jpg)
-<h1 align="center">Hi 👋, We are Omar ID HMAID and Soufiane OUMALEK</h1>
+<h2 align="center">Hi 👋, We are Omar ID HMAID and Soufiane OUMALEK</h2>
 <h3 align="center">And this is our AirBnB project</h3>
 <p align="center" style{font-famly: geneva; }>
 HolbertonBnB is a comprehensive web application that emulates AirBnB's functionality by seamlessly integrating database storage, a robust back-end API, and an intuitive front-end interface.<br>
